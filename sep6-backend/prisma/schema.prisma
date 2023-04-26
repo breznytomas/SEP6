@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model directors {
+  movie_id  Int
+  person_id Int
+  id        Int    @id(map: "directors_pk") @unique(map: "directors_id_uindex") @default(autoincrement())
+  movies    movies @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__directors__movie__66603565")
+  people    people @relation(fields: [person_id], references: [id], onUpdate: NoAction, map: "FK__directors__perso__6754599E")
+}
+
+model movies {
+  id        Int         @id(map: "PK__movies__3213E83F33F286D0")
+  title     String      @db.Text
+  year      Decimal?    @db.Decimal(18, 0)
+  directors directors[]
+  ratings   ratings[]
+  stars     stars[]
+}
+
+model people {
+  id        Int         @id(map: "PK__people__3213E83FD7ED8D91")
+  name      String      @db.Text
+  birth     Decimal?    @db.Decimal(18, 0)
+  directors directors[]
+  stars     stars[]
+}
+
+model ratings {
+  movie_id Int
+  rating   Float  @db.Real
+  votes    Int
+  id       Int    @id(map: "ratings_pk") @unique(map: "ratings_id_uindex") @default(autoincrement())
+  movies   movies @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__ratings__movie_i__693CA210")
+}
+
+model stars {
+  movie_id  Int
+  person_id Int
+  id        Int    @id(map: "stars_pk") @default(autoincrement())
+  movies    movies @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__stars__movie_id__6383C8BA")
+  people    people @relation(fields: [person_id], references: [id], onUpdate: NoAction, map: "FK__stars__person_id__6477ECF3")
+}
