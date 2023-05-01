@@ -22,8 +22,8 @@ app.use(cookieParser());
 
 //create and start server
 const server = http.createServer(app);
-server.listen(4200, () =>
-  console.log('server running on http://localhost:4200/')
+server.listen(process.env.prort || 4200, () =>
+  console.log('server running')
 );
 
-app.use('/', routers());
+app.use('/api/', routers());
