@@ -10,6 +10,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- checkout: self
+  path: sep6-backend
+- script: |
+    cd sep6-backend
+    npm install
+    npm run build
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
