@@ -21,7 +21,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/sep6-backend/dist'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/sep6-backend'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
