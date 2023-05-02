@@ -23,6 +23,9 @@ app.use(cookieParser());
 //create and start server
 const server = http.createServer(app);
 const port = process.env.PORT || 1337;
+
+console.log('test');
+
 server.listen(port, () => console.log('server running'));
 
 app.use('/api/', routers());
