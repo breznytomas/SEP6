@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url      = env("DATABASE_URL")
+  url      = "sqlserver://sep6-movies.database.windows.net:1433;database=movies-sql-db;user=usr_tymon;password=Dbnajarany123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
 }
 
 model directors {
@@ -16,12 +16,13 @@ model directors {
 }
 
 model movies {
-  id        Int         @id(map: "PK__movies__3213E83F33F286D0")
-  title     String      @db.Text
-  year      Decimal?    @db.Decimal(18, 0)
-  directors directors[]
-  ratings   ratings[]
-  stars     stars[]
+  id                  Int                   @id(map: "PK__movies__3213E83F33F286D0")
+  title               String                @db.Text
+  year                Decimal?              @db.Decimal(18, 0)
+  directors           directors[]
+  ratings             ratings[]
+  stars               stars[]
+  toplist_movies_join toplist_movies_join[]
 }
 
 model people {
@@ -46,4 +47,31 @@ model stars {
   id        Int    @id(map: "stars_pk") @default(autoincrement())
   movies    movies @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__stars__movie_id__6383C8BA")
   people    people @relation(fields: [person_id], references: [id], onUpdate: NoAction, map: "FK__stars__person_id__6477ECF3")
+}
+
+model users {
+  user_id   Int        @id(map: "PK__users__B9BE370FAD550BD4")
+  firstname String?    @db.NVarChar(255)
+  lastname  String?    @db.NVarChar(255)
+  email     String?    @unique(map: "UQ__users__AB6E61641B2EBB44") @db.NVarChar(255)
+  password  String?    @db.NVarChar(255)
+  toplists  toplists[]
+}
+
+model toplists {
+  toplist_id          Int                   @id(map: "PK__toplists__35FCC5A67345C6E4")
+  user_id             Int
+  name                String                @db.Text
+  description         String?               @db.Text
+  toplist_movies_join toplist_movies_join[]
+  users               users                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction, map: "FK__toplists__user_i__74AE54BC")
+}
+
+model toplist_movies_join {
+  toplist_id Int
+  movie_id   Int
+  movies     movies   @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__toplist_m__movie__7B5B524B")
+  toplists   toplists @relation(fields: [toplist_id], references: [toplist_id], onUpdate: NoAction, map: "FK__toplist_m__topli__7A672E12")
+
+  @@id([toplist_id, movie_id], map: "PK__toplist___BDC01AD24131D6BE")
 }
