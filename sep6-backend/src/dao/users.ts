@@ -10,13 +10,19 @@ export async function createUser(req, res, next){
 }
 
 
-export async function deleteUser(req, res, next){
+export async function deleteUser(req, res, next) {
 
-    const userData = req.body
+    try {
+        const id = req.user.id
 
-    await prisma.users.delete({
-        where: {
-            id : userData.id
-        }
-    },
-)}
+        await prisma.users.delete({
+            where: {
+                id: id
+            }
+        })
+    }
+    catch (error){
+        next(error)
+    }
+
+}

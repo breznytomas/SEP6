@@ -1,5 +1,12 @@
 import {getMovies} from "../dao/movies";
-import {addToplist, getToplistByUser} from "../dao/toplists";
+import {
+    addMovieIntoToplist,
+    addToplist,
+    deleteMovieFromToplist,
+    getMoviesfromToplists,
+    getToplistByUser,
+    removeToplist
+} from "../dao/toplists";
 
 export async function  getAllToplistsByUser(req,res, next){
     try {
@@ -21,17 +28,27 @@ export async function  createToplist(req,res, next){
 
 export async function  deleteToplist(req,res, next){
     try {
-        const movies = await getMovies();
-        res.status(200).json(movies);
+         await removeToplist(req,res,next)
+        res.status(200).json('success');
     } catch (error) {
         next(error);
     }
 }
 
-export async function  AddToToplist(req,res, next){
+export async function  addMovieToToplist(req,res, next){
     try {
-        const movies = await getMovies();
-        res.status(200).json(movies);
+        const toplistWithMovies = await addMovieIntoToplist(req, res, next);
+        res.status(200).json(toplistWithMovies)
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
+export async function  getMoviesInToplist(req,res, next){
+    try {
+        await getMoviesfromToplists(req, res, next);
     } catch (error) {
         next(error);
     }
@@ -39,8 +56,10 @@ export async function  AddToToplist(req,res, next){
 
 export async function  removeMovieFromToplist(req,res, next){
     try {
-        const movies = await getMovies();
-        res.status(200).json(movies);
+
+        await deleteMovieFromToplist(req, res, next)
+
+        res.status(200).json('success');
     } catch (error) {
         next(error);
     }
