@@ -22,6 +22,7 @@ model movies {
   directors directors[]
   ratings   ratings[]
   stars     stars[]
+  toplists toplists[]
 }
 
 model people {
@@ -46,4 +47,22 @@ model stars {
   id        Int    @id(map: "stars_pk") @default(autoincrement())
   movies    movies @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__stars__movie_id__6383C8BA")
   people    people @relation(fields: [person_id], references: [id], onUpdate: NoAction, map: "FK__stars__person_id__6477ECF3")
+}
+
+model users {
+  id   Int        @id(map: "PK__users__B9BE370F8418421F") @default(autoincrement())
+  firstname String?    @db.NVarChar(255)
+  lastname  String?    @db.NVarChar(255)
+  email     String?    @unique(map: "UQ__users__AB6E61643FA6D38C") @db.NVarChar(255)
+  password  String?    @db.NVarChar(255)
+  toplists  toplists[]
+}
+
+model toplists {
+  id  Int     @id(map: "PK__toplists__3213E83F51220DAE") @default(autoincrement())
+  name        String  @db.NVarChar(255)
+  description String? @db.Text
+  user_id     Int
+  users       users   @relation(fields: [user_id], references: [id])
+  movies      movies[]
 }

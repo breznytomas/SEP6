@@ -6,7 +6,17 @@ import compression from 'compression';
 import cors from 'cors';
 import routers from './routers/routers';
 
+
+
+
+const session = require('express-session');
+const passport = require('./middleware/authentication');
+
 const app = express();
+
+
+
+
 
 // midleware
 app.use(
@@ -24,8 +34,13 @@ app.use(cookieParser());
 const server = http.createServer(app);
 const port = process.env.PORT || 1337;
 
-console.log('test');
+app.use(session({ secret: 'Kuuuraw jebane', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 server.listen(port, () => console.log('server running'));
 
 app.use('/api/', routers());
+
+

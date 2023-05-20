@@ -1,8 +1,22 @@
 import express from 'express';
+import {getAllMovies, getMovieByName} from '../controllers/movies.controller';
+import {ensureAuthenticated} from "../controllers/login.controller";
 
-import { getAllMovies } from '../controllers/movies.controller';
 
-export default (router: express.Router) => {
-  console.log('router');
-  router.get('/movies', getAllMovies);
-};
+
+const createMoviesRouter = (): express.Router => {
+    const router = express.Router()
+
+
+
+  router.get('/' ,ensureAuthenticated, getAllMovies);
+
+  router.get('/:movieID',getMovieByName);
+
+
+
+
+
+return router
+}
+export default createMoviesRouter()
