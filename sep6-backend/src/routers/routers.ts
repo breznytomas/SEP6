@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import moviesRouter from './movies.router';
 import welcomeRouter from './welcome.router';
 import loginRouter from './login.router';
+import toplistRouter from "./toplist.router";
 
 
 
@@ -10,11 +11,11 @@ import loginRouter from './login.router';
 const createMainRouter = (): express.Router => {
     const router = express.Router();
 
-    console.log("id 1")
 
 router.use('/movies', moviesRouter);
 router.use('/welcome', welcomeRouter);
 router.use('/login', loginRouter);
+router.use('/toplists', toplistRouter);
 
 
 

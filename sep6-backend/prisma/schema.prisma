@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url      = "sqlserver://sep6-movies.database.windows.net:1433;database=movies-sql-db;user=usr_tymon;password=Dbnajarany123;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+  url      = env("DATABASE_URL")
 }
 
 model directors {
@@ -16,13 +16,13 @@ model directors {
 }
 
 model movies {
-  id                  Int                   @id(map: "PK__movies__3213E83F33F286D0")
-  title               String                @db.Text
-  year                Decimal?              @db.Decimal(18, 0)
-  directors           directors[]
-  ratings             ratings[]
-  stars               stars[]
-  toplist_movies_join toplist_movies_join[]
+  id        Int         @id(map: "PK__movies__3213E83F33F286D0")
+  title     String      @db.Text
+  year      Decimal?    @db.Decimal(18, 0)
+  directors directors[]
+  ratings   ratings[]
+  stars     stars[]
+  toplists toplists[]
 }
 
 model people {
@@ -50,28 +50,19 @@ model stars {
 }
 
 model users {
-  user_id   Int        @id(map: "PK__users__B9BE370FAD550BD4")
+  id   Int        @id(map: "PK__users__B9BE370F8418421F") @default(autoincrement())
   firstname String?    @db.NVarChar(255)
   lastname  String?    @db.NVarChar(255)
-  email     String?    @unique(map: "UQ__users__AB6E61641B2EBB44") @db.NVarChar(255)
+  email     String?    @unique(map: "UQ__users__AB6E61643FA6D38C") @db.NVarChar(255)
   password  String?    @db.NVarChar(255)
   toplists  toplists[]
 }
 
 model toplists {
-  toplist_id          Int                   @id(map: "PK__toplists__35FCC5A67345C6E4")
-  user_id             Int
-  name                String                @db.Text
-  description         String?               @db.Text
-  toplist_movies_join toplist_movies_join[]
-  users               users                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction, map: "FK__toplists__user_i__74AE54BC")
-}
-
-model toplist_movies_join {
-  toplist_id Int
-  movie_id   Int
-  movies     movies   @relation(fields: [movie_id], references: [id], onUpdate: NoAction, map: "FK__toplist_m__movie__7B5B524B")
-  toplists   toplists @relation(fields: [toplist_id], references: [toplist_id], onUpdate: NoAction, map: "FK__toplist_m__topli__7A672E12")
-
-  @@id([toplist_id, movie_id], map: "PK__toplist___BDC01AD24131D6BE")
+  id  Int     @id(map: "PK__toplists__3213E83F51220DAE") @default(autoincrement())
+  name        String  @db.NVarChar(255)
+  description String? @db.Text
+  user_id     Int
+  users       users   @relation(fields: [user_id], references: [id])
+  movies      movies[]
 }
