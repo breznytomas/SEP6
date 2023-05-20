@@ -12,7 +12,7 @@ export class moviesService {
     private urlUtil: UrlUtil
   ) {}
 
-  public getMovies(): Observable<movie> {
-    return this.httpClient.get<movie>(this.urlUtil.baseUrl + '/movies');
+  public getMovies(): Observable<movie[]> {
+    return this.httpClient.get<movie[]>(this.urlUtil.baseUrl + '/movies');
   }
 }
