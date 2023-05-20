@@ -9,7 +9,7 @@ const createMoviesRouter = (): express.Router => {
 
 
 
-  router.get('/' ,ensureAuthenticated, getAllMovies);
+  router.get('/' , getAllMovies);
 
   router.get('/:movieID',getMovieByName);
 
