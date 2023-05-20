@@ -1,12 +1,13 @@
 import express from "express";
 import {ensureAuthenticated} from "../controllers/login.controller";
 import {
-    AddToToplist,
+    addMovieToToplist,
     createToplist,
     deleteToplist,
-    getAllToplistsByUser,
+    getAllToplistsByUser, getMoviesInToplist,
     removeMovieFromToplist
 } from "../controllers/toplists.controller";
+
 
 
 const createToplistRouter = (): express.Router => {
@@ -16,11 +17,13 @@ const createToplistRouter = (): express.Router => {
 
     router.post('/',ensureAuthenticated, createToplist);
 
-    router.delete('/', ensureAuthenticated, deleteToplist );
+    router.delete('/:id', ensureAuthenticated, deleteToplist );
 
-    router.post('/create',ensureAuthenticated,AddToToplist);
+    router.post('/create',ensureAuthenticated,addMovieToToplist);
 
-    router.delete('movieToplist',ensureAuthenticated, removeMovieFromToplist)
+    router.get('/toplistMovies', ensureAuthenticated, getMoviesInToplist)
+
+    router.post('/disconnect',ensureAuthenticated, removeMovieFromToplist)
 
 
     return router

@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -6,6 +9,7 @@ datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
+
 
 model directors {
   movie_id  Int
@@ -66,3 +70,5 @@ model toplists {
   users       users   @relation(fields: [user_id], references: [id])
   movies      movies[]
 }
+
+

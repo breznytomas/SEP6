@@ -1,5 +1,5 @@
 import express from "express";
-import {createAccount, deleteAccount, login, logout} from "../controllers/login.controller";
+import {createAccount, deleteAccount, ensureAuthenticated, login, logout} from "../controllers/login.controller";
 
 
 const createLoginRouter = (): express.Router => {
@@ -8,7 +8,7 @@ const createLoginRouter = (): express.Router => {
 
     router.post('/signup',createAccount )
 
-    router.delete('/', deleteAccount)
+    router.delete('/', ensureAuthenticated, deleteAccount)
 
     router.post('/login',login)
 
