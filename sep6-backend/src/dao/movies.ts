@@ -2,88 +2,91 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const getMovies = async () =>
-  await prisma.movies.findMany({
-
-      where:{
-          year:{
-              gte: 2010,
-              lte:  2020
-          }
-      },
-
-      orderBy: {
-          year: 'desc', // sorting movies by year in descending order to get newest movies first
-      },
-      take: 10,
-      include: {
-          directors: {
-              include: {
-                  people:true,
-              },
-          },
-          stars: {
-              include: {
-                  people: true,
-              },
-          },
-          ratings: true
-      }
-  });
-
-
-export async function getMovieDirectorOrActor(searchTerm){
-
+export async  function getMovies() {
     const movies = await prisma.movies.findMany({
+
         where: {
-            title: {
-                contains: searchTerm,
+            year: {
+                gte: 1980,
+                lte: 2020
             },
         },
-        take: 3,
-    });
 
-    const people = await prisma.people.findMany({
-        where: {
-            name: {
-                contains: searchTerm,
+        take: 100,
+        include: {
+            directors: {
+                include: {
+                    people: true,
+                },
             },
-        },
-        take: 3,
+            stars: {
+                include: {
+                    people: true,
+                },
+            },
+            ratings: true
+        }
     });
 
-    return {
-        movies,
-        people,
-    };
+    const moviesWithsubfields = movies.filter(
+        movie => movie.directors.length >0
+    && movie.stars.length >0);
+
+    return moviesWithsubfields
 }
 
-export async function getMovieDetails(movieId){
 
-   return prisma.movies.findUnique({
+    export async function getMovieDirectorOrActor(searchTerm) {
 
-       where: {
-           id: parseInt(movieId)
+        const movies = await prisma.movies.findMany({
+            where: {
+                title: {
+                    contains: searchTerm,
+                },
+            },
+            take: 3,
+        });
 
-       },
+        const people = await prisma.people.findMany({
+            where: {
+                name: {
+                    contains: searchTerm,
+                },
+            },
+            take: 3,
+        });
 
-       include: {
-           directors: {
-               include: {
-                   people: true,
-               },
-           },
-           stars: {
-               include: {
-                   people: true,
-               },
-           },
-           ratings: true
-       }
-   });
+        return {
+            movies,
+            people,
+        };
+    }
+
+    export async function getMovieDetails(movieId) {
+
+        return prisma.movies.findUnique({
+
+            where: {
+                id: parseInt(movieId)
+
+            },
+
+            include: {
+                directors: {
+                    include: {
+                        people: true,
+                    },
+                },
+                stars: {
+                    include: {
+                        people: true,
+                    },
+                },
+                ratings: true
+            }
+        });
 
 
-
-}
+    }
 
 
