@@ -1,6 +1,5 @@
 import express from 'express';
-import {getAllMovies, getMovieByName} from '../controllers/movies.controller';
-import {ensureAuthenticated} from "../controllers/login.controller";
+import {getAllMovies, getDetailsMovie,  getSearchResults} from '../controllers/movies.controller';
 
 
 
@@ -9,9 +8,13 @@ const createMoviesRouter = (): express.Router => {
 
 
 
-  router.get('/' ,ensureAuthenticated, getAllMovies);
+  router.get('/' , getAllMovies);
 
-  router.get('/:movieID',getMovieByName);
+  router.get('/:name',getSearchResults);
+
+  router.get('/movie/:movieId',getDetailsMovie);
+
+
 
 
 
