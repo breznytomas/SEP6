@@ -1,0 +1,20 @@
+<div id="body">
+    <div id="content-container">
+        <div id="featured-movie-container" (click)="openDetails(featuredMovie)">
+            <app-movie-card [movie]="featuredMovie" [isFeatured]="true" class="featured-movie-card"></app-movie-card>
+            <div class="descritpion featured-descritpion">
+                <p class="title">{{featuredMovie.title}}</p>
+                {{featuredMovie.director.name}}
+            </div>
+        </div>
+        <div id="movie-cards">
+            <div class="movie-row" *ngFor="let movie of movies" (click)="openDetails(movie)">
+                <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+                <div class="descritpion">
+                    <p class="title">{{movie.title}}</p>
+                    {{movie.director.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

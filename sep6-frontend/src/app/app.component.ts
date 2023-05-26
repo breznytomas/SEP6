@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { movie } from './models/movie';
-import { moviesService } from './services/movies.service';
+import { Movie } from './models/movie';
+import { MoviesService } from './services/movies.service';
 import { Subject, map, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,21 @@ import { Subject, map, takeUntil } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  public movies: movie[];
-  public mainMovie: movie;
+  public movies: Movie[];
+  public featuredMovie: Movie;
+  public showSearch = false;
   private _unsubscribe$ = new Subject();
-  public constructor(private _moviesService: moviesService) {}
+  selectedMovie: Movie;
 
-  ngOnInit(): void {
-    this._moviesService
-      .getMovies()
-      .pipe(takeUntil(this._unsubscribe$))
-      .subscribe((movies) => {
-        this.movies = movies;
-        this.mainMovie = movies[0];
-        console.log(movies);
-      });
+  public constructor(private router: Router) {}
+
+  ngOnInit(): void {}
+
+  public onSubmit(searchTerm: string) {
+    if (searchTerm) {
+      this.router.navigate(['/search', { term: searchTerm }]);
+      this.showSearch = false;
+    }
   }
 
   ngOnDestroy(): void {

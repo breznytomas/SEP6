@@ -1,0 +1,19 @@
+<div class="person-details">
+    <div class="info">
+        <h2>{{ person.name }}</h2>
+        <p><strong>Starred in:</strong></p>
+        <div class="movie-cards">
+            <div *ngFor="let movie of person.starredIn" (click)="openDetails(movie)">
+                <h3>{{movie.title}}</h3>
+                <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+            </div>
+        </div>
+        <p><strong>Directed:</strong></p>
+        <div class="movie-cards">
+            <div *ngFor="let movie of person.directed" (click)="openDetails(movie)">
+                <h3>{{movie.title}}</h3>
+                <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+            </div>
+        </div>
+    </div>
+</div>

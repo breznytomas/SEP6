@@ -1,0 +1,14 @@
+#poster-container {
+  display: flex;
+  img {
+    &.no-poster {
+      width: 92px;
+      height: 138px;
+
+      &.featured {
+        width: 570px;
+        height: 750px;
+      }
+    }
+  }
+}

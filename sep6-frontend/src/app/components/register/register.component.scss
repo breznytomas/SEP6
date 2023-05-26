@@ -1,0 +1,53 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: #232323;
+  width: 300px;
+  padding: 20px;
+  margin: 0 auto;
+
+  h2 {
+    color: #ff9900;
+    font-size: 24px;
+  }
+
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    label {
+      font-size: 16px;
+      color: #bbbbbb;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      color: #232323;
+      margin-top: 5px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 5px;
+    }
+  }
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff9900;
+    color: #232323;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#ff9900, 10%);
+    }
+  }
+}

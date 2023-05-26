@@ -1,0 +1,44 @@
+.person-details {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+
+  .info {
+    h2 {
+      color: #ff9900;
+      font-size: 24px;
+    }
+
+    p {
+      strong {
+        color: #bbbbbb;
+      }
+
+      span {
+        color: white;
+      }
+    }
+
+    h3 {
+      color: #ff9900;
+      font-size: 20px;
+    }
+
+    .movie-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .movie-card {
+        width: calc(50% - 10px);
+        margin-bottom: 20px;
+
+        // Apply the following styles if there are more than two movie cards
+        &:nth-child(n + 3) {
+          width: calc(33.33% - 10px);
+        }
+      }
+    }
+  }
+}

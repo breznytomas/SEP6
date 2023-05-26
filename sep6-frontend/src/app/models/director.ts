@@ -1,1 +1,5 @@
-export interface director {}
+export interface Director {
+  id: number;
+  name: string;
+  birth: string;
+}

@@ -1,10 +1,13 @@
-import { director } from './director';
-import { star } from './star';
+import { Director } from './director';
+import { Rating } from './rating';
+import { Star } from './star';
 
-export interface movie {
+export interface Movie {
   id: number;
   title: string;
   year: string;
-  directors: director[];
-  stars: star[];
+  director: Director;
+  stars: Star[];
+  poster?: string;
+  rating?: Rating;
 }

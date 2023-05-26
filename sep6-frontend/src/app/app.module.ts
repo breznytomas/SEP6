@@ -4,15 +4,52 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MoviePageComponent } from './components/movie-page/movie-page.component';
-import { moviesService } from './services/movies.service';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { MoviesService } from './services/movies.service';
 import { UrlUtil } from './services/urlUtil';
-import { posterService } from './services/poster.service';
+import { PosterService } from './services/poster.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { PersonDetailsComponent } from './components/person-details/person-details.component';
+import { PersonService } from './services/person.service';
+import { LogonComponent } from './components/logon/logon.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
-  declarations: [AppComponent, MoviePageComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
-  providers: [moviesService, UrlUtil, posterService],
+  declarations: [
+    AppComponent,
+    MovieCardComponent,
+    MovieDetailsComponent,
+    HomePageComponent,
+    PersonDetailsComponent,
+    LogonComponent,
+    RegisterComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+  ],
+  providers: [
+    MoviesService,
+    UrlUtil,
+    PosterService,
+    PersonService,
+    UserService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

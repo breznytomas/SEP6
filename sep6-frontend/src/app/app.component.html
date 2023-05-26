@@ -1,1 +1,20 @@
-<app-movie-page [movie]="mainMovie"></app-movie-page>
+<mat-toolbar color="primary" id="toolbar">
+    <div id="left-items">
+        <span class="app-name">Sep 6 movies portal</span>
+    </div>
+    <div id="right-items">
+
+        <form class="search-form" *ngIf="showSearch" (submit)="onSubmit(searchValue.value)">
+            <input matInput #searchValue placeholder="Search" autofocus class="search-input">
+        </form>
+        <button mat-icon-button aria-label="Search" (click)="showSearch = !showSearch">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button [routerLink]="['/account/logon']">Login</button>
+    </div>
+</mat-toolbar>
+
+<body>
+
+    <router-outlet></router-outlet>
+</body>
