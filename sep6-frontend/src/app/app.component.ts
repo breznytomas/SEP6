@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from './models/movie';
 import { MoviesService } from './services/movies.service';
-import { Subject, map, takeUntil } from 'rxjs';
+import { Observable, Subject, map, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +15,20 @@ export class AppComponent implements OnInit, OnDestroy {
   public movies: Movie[];
   public featuredMovie: Movie;
   public showSearch = false;
+  public currentUser: User;
   private _unsubscribe$ = new Subject();
   selectedMovie: Movie;
 
-  public constructor(private router: Router) {}
+  public constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.currentUser
+      .pipe(takeUntil(this._unsubscribe$))
+      .subscribe((u) => (this.currentUser = u));
+  }
 
   public onSubmit(searchTerm: string) {
     if (searchTerm) {

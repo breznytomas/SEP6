@@ -10,7 +10,8 @@
         <button mat-icon-button aria-label="Search" (click)="showSearch = !showSearch">
             <mat-icon>search</mat-icon>
         </button>
-        <button mat-button [routerLink]="['/account/logon']">Login</button>
+        <button *ngIf="!currentUser" mat-button [routerLink]="['/account/logon']">Login</button>
+        <button *ngIf="currentUser" mat-button [routerLink]="['/account/profile']">{{currentUser.email}}</button>
     </div>
 </mat-toolbar>
 

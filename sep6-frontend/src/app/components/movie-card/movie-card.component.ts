@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
 import { PosterService } from 'src/app/services/poster.service';
@@ -15,11 +15,13 @@ export class MovieCardComponent implements OnInit {
   private _movie: Movie;
   public posterUri: string;
   public isPoster: boolean = true;
-
+  private _isFeatured: boolean = false;
+  @Input() public set isFeatured(isFeatured: boolean) {
+    this._isFeatured = isFeatured;
+    this.cdr.detectChanges();
+  }
   @Input() public set movie(movie: Movie) {
     if (movie) {
-      this._movie = movie;
-
       // temporary hack -> in the future fetch only new movies from db so no need to add 00
       this.posterService
         .getPoster(`tt00${movie.id}`, this.isFeatured)
@@ -31,14 +33,25 @@ export class MovieCardComponent implements OnInit {
             this.posterUri = 'assets/no-img.jpeg';
             this.isPoster = false;
           }
+          this._movie = movie;
         });
     }
   }
 
-  @Input() public isFeatured: boolean = false;
-  public constructor(private posterService: PosterService) {}
+  public constructor(
+    private posterService: PosterService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   public ngOnInit(): void {}
+
+  public get isFeatured(): boolean {
+    return this._isFeatured;
+  }
+
+  public get movie(): Movie {
+    return this._movie;
+  }
 
   public ngOnDestroy(): void {
     this._unsubscribe$.next(true);

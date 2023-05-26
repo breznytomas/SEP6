@@ -19,4 +19,9 @@ export class UserService {
       { withCredentials: true }
     );
   }
+
+  public register(user: User) {
+    const registerUrl = `${this.urlUtil.baseUrl}/login/signup`;
+    return this.httpClient.post(registerUrl, user);
+  }
 }

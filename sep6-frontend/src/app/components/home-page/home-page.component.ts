@@ -25,8 +25,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
       .getMovies()
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((movies) => {
-        this.movies = movies;
-        this.featuredMovie = movies[3];
+        if (movies) {
+          this.featuredMovie = movies[3];
+          this.movies = movies;
+          console.log(this.featuredMovie);
+        }
       });
   }
 

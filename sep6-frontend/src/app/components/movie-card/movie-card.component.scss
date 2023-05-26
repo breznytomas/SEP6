@@ -1,14 +1,13 @@
 #poster-container {
   display: flex;
   img {
+    &.featured {
+      width: 570px;
+      height: 750px;
+    }
     &.no-poster {
       width: 92px;
       height: 138px;
-
-      &.featured {
-        width: 570px;
-        height: 750px;
-      }
     }
   }
 }

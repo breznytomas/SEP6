@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './services/user.service';
+import { AuthenticationService } from './services/authentication.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { UserService } from './services/user.service';
     PersonDetailsComponent,
     LogonComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { UserService } from './services/user.service';
     PosterService,
     PersonService,
     UserService,
+    AuthenticationService,
   ],
   bootstrap: [AppComponent],
 })

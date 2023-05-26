@@ -1,7 +1,7 @@
 <div id="body">
-    <div id="content-container">
+    <div id="content-container" *ngIf="featuredMovie">
         <div id="featured-movie-container" (click)="openDetails(featuredMovie)">
-            <app-movie-card [movie]="featuredMovie" [isFeatured]="true" class="featured-movie-card"></app-movie-card>
+            <app-movie-card [isFeatured]="true" [movie]="featuredMovie" class="featured-movie-card"></app-movie-card>
             <div class="descritpion featured-descritpion">
                 <p class="title">{{featuredMovie.title}}</p>
                 {{featuredMovie.director.name}}

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
 
-  public constructor(private fb: FormBuilder) {}
+  public constructor(
+    private fb: FormBuilder,
+    private authService: AuthenticationService
+  ) {}
 
   public ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -49,6 +54,12 @@ export class RegisterComponent implements OnInit {
       const lastName = this.registerForm.get('lastName')?.value;
       const email = this.registerForm.get('email')?.value;
       const password = this.registerForm.get('password')?.value;
+      const user: User = {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
+      };
       console.log(
         'Registration Successful',
         firstName,
@@ -56,6 +67,7 @@ export class RegisterComponent implements OnInit {
         email,
         password
       );
+      this.authService.register(user);
     } else {
       console.log('Form is not valid');
     }
