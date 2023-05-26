@@ -1,23 +1,19 @@
 import express from 'express';
-import {getAllMovies, getDetailsMovie} from '../controllers/movies.controller';
-
-
+import {
+  getAllMovies,
+  getDetailsMovie,
+  getSearchResults,
+} from '../controllers/movies.controller';
 
 const createMoviesRouter = (): express.Router => {
-    const router = express.Router()
+  const router = express.Router();
 
+  router.get('/', getAllMovies);
 
+  router.get('/movie/:movieId', getDetailsMovie);
 
-  router.get('/' , getAllMovies);
+  router.get('/search/:name', getSearchResults);
 
-  router.get('/movie/:movieId',getDetailsMovie);
-
-
-
-
-
-
-
-return router
-}
-export default createMoviesRouter()
+  return router;
+};
+export default createMoviesRouter();
