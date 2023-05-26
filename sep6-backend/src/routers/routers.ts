@@ -1,8 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import moviesRouter from './movies.router';
 import welcomeRouter from './welcome.router';
 import loginRouter from './login.router';
 import toplistRouter from "./toplist.router";
+import peopleRouter from "./people.router";
 
 
 
@@ -16,6 +17,7 @@ router.use('/movies', moviesRouter);
 router.use('/welcome', welcomeRouter);
 router.use('/login', loginRouter);
 router.use('/toplists', toplistRouter);
+router.use('/people', peopleRouter);
 
 
 
