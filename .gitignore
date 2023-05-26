@@ -64,3 +64,4 @@ TEST-results.xml
 lib/
 
 .fake
+sep6-frontend/src/environment.ts
