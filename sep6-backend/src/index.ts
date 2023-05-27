@@ -36,11 +36,8 @@ app.use(
   session({
     secret: 'Kuuuraw jebane',
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-      sameSite: 'none', //allow frontend to store cookies
-      secure: true, //need this otherwise cookie wont be stored
-    },
+    saveUninitialized: false,
+    cookie: { secure: true, sameSite: 'none' },
   })
 );
 app.use(passport.initialize());
