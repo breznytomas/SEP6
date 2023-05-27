@@ -16,7 +16,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:4200',
-      'https://sep6-movies-portal.azurewebsites.net/',
+      'https://localhost:4200',
+      'https://sep6-movies-portal.azurewebsites.net',
     ],
 
     credentials: true,
@@ -33,7 +34,12 @@ const server = http.createServer(app);
 const port = process.env.PORT || 1337;
 
 app.use(
-  session({ secret: 'Kuuuraw jebane', resave: false, saveUninitialized: false })
+  session({
+    secret: 'Kuuuraw jebane',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true, sameSite: 'none' },
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());

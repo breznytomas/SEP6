@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,7 +6,6 @@ datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
-
 
 model directors {
   movie_id  Int
@@ -26,7 +22,7 @@ model movies {
   directors directors[]
   ratings   ratings[]
   stars     stars[]
-  toplists toplists[]
+  toplists  toplists[]  @relation("moviesTotoplists")
 }
 
 model people {
@@ -54,7 +50,7 @@ model stars {
 }
 
 model users {
-  id   Int        @id(map: "PK__users__B9BE370F8418421F") @default(autoincrement())
+  id        Int        @id(map: "PK__users__B9BE370F8418421F") @default(autoincrement())
   firstname String?    @db.NVarChar(255)
   lastname  String?    @db.NVarChar(255)
   email     String?    @unique(map: "UQ__users__AB6E61643FA6D38C") @db.NVarChar(255)
@@ -63,12 +59,10 @@ model users {
 }
 
 model toplists {
-  id  Int     @id(map: "PK__toplists__3213E83F51220DAE") @default(autoincrement())
-  name        String  @db.NVarChar(255)
-  description String? @db.Text
+  id          Int      @id(map: "PK__toplists__3213E83F51220DAE") @default(autoincrement())
+  name        String   @db.NVarChar(255)
+  description String?  @db.Text
   user_id     Int
-  users       users   @relation(fields: [user_id], references: [id])
-  movies      movies[]
+  users       users    @relation(fields: [user_id], references: [id])
+  movies      movies[] @relation("moviesTotoplists")
 }
-
-
