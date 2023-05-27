@@ -33,6 +33,8 @@ app.use(cookieParser());
 const server = http.createServer(app);
 const port = process.env.PORT || 1337;
 
+app.set('trust proxy', 1);
+
 app.use(
   session({
     secret: 'Kuuuraw jebane',
