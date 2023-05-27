@@ -65,3 +65,4 @@ lib/
 
 .fake
 sep6-frontend/src/environment.ts
+*.pem

@@ -16,7 +16,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:4200',
-      'https://sep6-movies-portal.azurewebsites.net/',
+      'https://localhost:4200',
+      'https://sep6-movies-portal.azurewebsites.net',
     ],
 
     credentials: true,
