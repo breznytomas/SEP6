@@ -10,7 +10,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
-
+  public isLoading: boolean = false;
   public constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService
@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.isLoading = true;
     if (this.registerForm.valid) {
       const firstName = this.registerForm.get('firstName')?.value;
       const lastName = this.registerForm.get('lastName')?.value;

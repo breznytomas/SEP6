@@ -1,3 +1,7 @@
+<div class="spinner-container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
+
 <div class="login-form">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <h2>Login</h2>
@@ -15,7 +19,10 @@
                 Password is required
             </div>
         </div>
-        <button type="submit">Login</button>
-        <button routerLink="/account/register">Register</button>
+        <div class="buttons">
+
+            <button type="submit">Login</button>
+            <button routerLink="/account/register">Register</button>
+        </div>
     </form>
 </div>

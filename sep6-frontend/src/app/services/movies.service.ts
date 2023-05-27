@@ -5,6 +5,7 @@ import { catchError, map, retry } from 'rxjs/operators';
 import { Movie } from '../models/movie';
 import { UrlUtil } from './urlUtil';
 import { Star } from '../models/star';
+import { SearchResult } from '../models/search-result';
 
 @Injectable()
 export class MoviesService {
@@ -74,6 +75,17 @@ export class MoviesService {
 
           return movie;
         })
+      );
+  }
+
+  public search(searchTerm: string): Observable<SearchResult> {
+    return this.httpClient
+      .get<SearchResult>(this.urlUtil.baseUrl + '/movies/search/' + searchTerm)
+      .pipe(
+        map((response) => ({
+          movies: response.movies,
+          people: response.people,
+        }))
       );
   }
 }

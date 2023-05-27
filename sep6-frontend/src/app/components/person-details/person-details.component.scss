@@ -34,11 +34,14 @@
         width: calc(50% - 10px);
         margin-bottom: 20px;
 
-        // Apply the following styles if there are more than two movie cards
         &:nth-child(n + 3) {
           width: calc(33.33% - 10px);
         }
       }
     }
   }
+}
+.spinner-container {
+  display: flex;
+  justify-content: center;
 }

@@ -13,6 +13,7 @@ import { PersonService } from 'src/app/services/person.service';
 })
 export class PersonDetailsComponent implements OnInit, OnDestroy {
   public person: Person;
+  public isLoading = false;
   private _unsubscribe$ = new Subject();
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +23,14 @@ export class PersonDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit() {
+    this.isLoading = true;
     const id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.personService
       .getRelatedMovies(id)
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((person: Person) => {
         this.person = person;
+        this.isLoading = false;
       });
   }
 

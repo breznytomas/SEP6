@@ -1,3 +1,6 @@
+<div class="spinner-container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
 <div id="body">
     <div id="content-container" *ngIf="featuredMovie">
         <div id="featured-movie-container" (click)="openDetails(featuredMovie)">

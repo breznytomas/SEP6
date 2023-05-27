@@ -17,6 +17,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   public posterUri: string;
   public isPoster: boolean = true;
   private _unsubscribe$ = new Subject();
+  public isLoading: boolean = false;
 
   public constructor(
     private router: Router,
@@ -26,7 +27,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     let movieId = history.state.movie.id;
-
+    this.isLoading = true;
     forkJoin({
       movieDetails: this.moviesService
         .getMovieDetails(movieId)
@@ -35,6 +36,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
         .getPoster(`tt00${movieId}`, true)
         .pipe(takeUntil(this._unsubscribe$)),
     }).subscribe(({ movieDetails, poster }) => {
+      this.isLoading = false;
       if (movieDetails) {
         this.movie = movieDetails;
         this.stars = movieDetails.stars;

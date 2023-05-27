@@ -1,0 +1,28 @@
+<div class="spinner-container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
+
+
+<div *ngIf="!isLoading && searchResult" class="container profile-details">
+    <!-- Display the movies -->
+    <div class="movie-cards">
+        <h1 class="header">Movies</h1>
+        <div *ngFor="let movie of searchResult.movies" (click)="openDetails(movie)" class="card">
+            <h2 class="movie-title">{{ movie.title }}</h2>
+            <hr class="divider">
+            <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+        </div>
+    </div>
+
+    <!-- Display the people -->
+    <div class="people-cards">
+        <h1 class="header">People</h1>
+        <div *ngFor="let person of searchResult.people" class="card">
+            <h2 class="person-name"><a [routerLink]="['/person', person.id]">{{ person.name}}</a></h2>
+            <hr class="divider">
+
+        </div>
+    </div>
+</div>
+
+<h2 *ngIf="!isLoading && !searchResult">{{error}}</h2>

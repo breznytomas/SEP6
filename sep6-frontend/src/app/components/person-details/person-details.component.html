@@ -1,3 +1,6 @@
+<div class="spinner-container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
 <div class="person-details" *ngIf="person">
     <div class="info">
         <h2>{{ person.name }}</h2>

@@ -23,6 +23,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './services/user.service';
 import { AuthenticationService } from './services/authentication.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { ToplistService } from './services/toplist.service';
+import { ToplistComponent } from './components/toplist/toplist.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     LogonComponent,
     RegisterComponent,
     ProfileComponent,
+    SearchResultComponent,
+    ToplistComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +52,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     MoviesService,
@@ -53,6 +61,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     PersonService,
     UserService,
     AuthenticationService,
+    ToplistService,
   ],
   bootstrap: [AppComponent],
 })

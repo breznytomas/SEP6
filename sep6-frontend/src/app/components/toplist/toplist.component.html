@@ -1,0 +1,11 @@
+<div id="movie-cards" *ngFor="let toplist of topLists">
+    <h2>{{ toplist.name }}</h2>
+    <p>{{ toplist.description }}</p>
+    <div class="movie-row" *ngFor="let movie of toplist.movies" (click)="openDetails(movie)">
+        <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+        <div class="descritpion">
+            <p class="title">{{movie.title}}</p>
+            {{movie.year}}
+        </div>
+    </div>
+</div>

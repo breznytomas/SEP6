@@ -1,13 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-logon',
@@ -17,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LogonComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   private _unsubscribe$ = new Subject();
+  public isLoading = false;
 
   public constructor(
     private fb: FormBuilder,
@@ -31,6 +26,7 @@ export class LogonComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
+    this.isLoading = true;
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;

@@ -1,6 +1,8 @@
 <mat-toolbar color="primary" id="toolbar">
     <div id="left-items">
-        <span class="app-name">Sep 6 movies portal</span>
+        <span class="app-name"><a [routerLink]="['/']">Sep 6 movies portal</a></span>
+        <button *ngIf="currentUser" mat-button [routerLink]="['/toplists']">Toplists</button>
+
     </div>
     <div id="right-items">
 

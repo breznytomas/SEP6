@@ -12,6 +12,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   public movies: Movie[];
   public featuredMovie: Movie;
+  public isLoading = false;
   private _unsubscribe$ = new Subject();
   selectedMovie: Movie;
 
@@ -21,11 +22,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this.isLoading = true;
     this._moviesService
       .getMovies()
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((movies) => {
         if (movies) {
+          this.isLoading = false;
           this.featuredMovie = movies[3];
           this.movies = movies;
           console.log(this.featuredMovie);

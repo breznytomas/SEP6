@@ -7,6 +7,8 @@ import { PersonDetailsComponent } from './components/person-details/person-detai
 import { LogonComponent } from './components/logon/logon.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { ToplistComponent } from './components/toplist/toplist.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'account/logon', component: LogonComponent },
   { path: 'account/register', component: RegisterComponent },
   { path: 'account/profile', component: ProfileComponent },
+  { path: 'search', component: SearchResultComponent },
+  { path: 'toplists', component: ToplistComponent },
 ];
 
 @NgModule({
