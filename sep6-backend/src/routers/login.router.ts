@@ -1,18 +1,18 @@
 import express from "express";
 import {createAccount, deleteAccount, ensureAuthenticated, login, logout} from "../controllers/login.controller";
-
+import {handleErrorAsync} from "../middleware/errorHandling"
 
 const createLoginRouter = (): express.Router => {
     const router = express.Router()
 
 
-    router.post('/signup',createAccount )
+    router.post('/signup', handleErrorAsync(createAccount) )
 
-    router.delete('/', ensureAuthenticated, deleteAccount)
+    router.delete('/', ensureAuthenticated, handleErrorAsync(deleteAccount))
 
-    router.post('/login',login)
+    router.post('/login',handleErrorAsync(login))
 
-    router.get('/logout',logout)
+    router.get('/logout',handleErrorAsync(logout))
 
     return router
 }
