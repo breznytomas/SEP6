@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import routers from './routers/routers';
+import {errorHandler} from "./middleware/errorHandling";
+
 
 
 
@@ -15,7 +17,7 @@ const passport = require('./middleware/authentication');
 const app = express();
 
 
-
+app.use(errorHandler)
 
 
 // midleware
@@ -30,6 +32,7 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
 //create and start server
 const server = http.createServer(app);
 const port = process.env.PORT || 1337;
@@ -40,6 +43,8 @@ app.use(passport.session());
 
 
 server.listen(port, () => console.log('server running'));
+
+
 
 app.use('/api/', routers());
 
