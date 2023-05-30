@@ -4,26 +4,25 @@ import {
     addMovieToToplist,
     createToplist,
     deleteToplist,
-    getAllToplistsByUser, getMoviesInToplist,
+    getAllToplistsByUser,
     removeMovieFromToplist
 } from "../controllers/toplists.controller";
+import {handleErrorAsync} from "../middleware/errorHandling";
 
 
 
 const createToplistRouter = (): express.Router => {
     const router = express.Router()
 
-    router.get('/' ,ensureAuthenticated,getAllToplistsByUser );
+    router.get('/' ,ensureAuthenticated,handleErrorAsync(getAllToplistsByUser));
 
-    router.post('/',ensureAuthenticated, createToplist);
+    router.post('/',ensureAuthenticated, handleErrorAsync(createToplist));
 
-    router.delete('/:id', ensureAuthenticated, deleteToplist );
+    router.delete('/:id', ensureAuthenticated, handleErrorAsync(deleteToplist) );
 
-    router.post('/create',ensureAuthenticated,addMovieToToplist);
+    router.post('/create',ensureAuthenticated,handleErrorAsync(addMovieToToplist));
 
-    router.get('/toplistMovies', ensureAuthenticated, getMoviesInToplist)
-
-    router.post('/disconnect',ensureAuthenticated, removeMovieFromToplist)
+    router.post('/disconnect',ensureAuthenticated, handleErrorAsync(removeMovieFromToplist))
 
 
     return router

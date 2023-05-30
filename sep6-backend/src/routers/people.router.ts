@@ -1,5 +1,6 @@
 import express from "express";
 import {getPersonDetails} from "../controllers/people.controller";
+import {handleErrorAsync} from "../middleware/errorHandling";
 
 
 const createPeopleRouter = (): express.Router => {
@@ -7,12 +8,7 @@ const createPeopleRouter = (): express.Router => {
 
 
 
-    router.get('/:personId' , getPersonDetails);
-
-
-
-
-
+    router.get('/:personId' , handleErrorAsync(getPersonDetails));
 
 
 

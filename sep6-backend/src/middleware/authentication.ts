@@ -1,5 +1,3 @@
-import {getMovies} from "../dao/movies";
-
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -17,7 +15,9 @@ passport.use(new LocalStrategy({
         if (!user) {
             return done(null, false, { message: 'Incorrect username.' });
         }
-        if ( password != user.password) {
+        const passwordMatch = await bcrypt.compare(password, user.password)
+
+        if ( !passwordMatch) {
             return done(null, false, { message: 'Incorrect password.' });
         }
         return done(null, user);
@@ -34,4 +34,4 @@ passport.deserializeUser(async function(id, done) {
 });
 
 
-module .exports= passport;
+module.exports= passport;

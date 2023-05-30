@@ -12,7 +12,6 @@ import peopleRouter from "./people.router";
 const createMainRouter = (): express.Router => {
     const router = express.Router();
 
-
 router.use('/movies', moviesRouter);
 router.use('/welcome', welcomeRouter);
 router.use('/login', loginRouter);
