@@ -31,7 +31,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.featuredMovie = movies[3];
           this.movies = movies;
-          console.log(this.featuredMovie);
         }
       });
   }

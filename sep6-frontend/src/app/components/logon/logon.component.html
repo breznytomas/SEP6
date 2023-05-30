@@ -2,7 +2,10 @@
     <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>
 
+
+
 <div class="login-form">
+    <h1 *ngIf="error">{{error}}</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <h2>Login</h2>
         <div class="form-control">

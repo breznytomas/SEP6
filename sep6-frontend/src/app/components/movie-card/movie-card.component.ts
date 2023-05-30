@@ -22,9 +22,8 @@ export class MovieCardComponent implements OnInit {
   }
   @Input() public set movie(movie: Movie) {
     if (movie) {
-      // temporary hack -> in the future fetch only new movies from db so no need to add 00
       this.posterService
-        .getPoster(`tt00${movie.id}`, this.isFeatured)
+        .getPoster(movie.id, this.isFeatured)
         .pipe(takeUntil(this._unsubscribe$))
         .subscribe((uri) => {
           if (uri) {

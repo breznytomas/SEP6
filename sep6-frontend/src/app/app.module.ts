@@ -25,9 +25,10 @@ import { AuthenticationService } from './services/authentication.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { FormsModule } from '@angular/forms';
 import { ToplistService } from './services/toplist.service';
 import { ToplistComponent } from './components/toplist/toplist.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -48,11 +49,13 @@ import { ToplistComponent } from './components/toplist/toplist.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   providers: [
     MoviesService,

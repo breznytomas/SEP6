@@ -2,7 +2,6 @@
     <div id="left-items">
         <span class="app-name"><a [routerLink]="['/']">Sep 6 movies portal</a></span>
         <button *ngIf="currentUser" mat-button [routerLink]="['/toplists']">Toplists</button>
-
     </div>
     <div id="right-items">
 
@@ -17,7 +16,6 @@
     </div>
 </mat-toolbar>
 
-<body>
-
+<div id="body">
     <router-outlet></router-outlet>
-</body>
+</div>

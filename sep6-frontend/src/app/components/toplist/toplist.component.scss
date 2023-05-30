@@ -1,3 +1,10 @@
+button {
+  background-color: #ff9900;
+  color: white;
+  &:hover {
+    background-color: #e68a00;
+  }
+}
 #movie-cards {
   background-color: #232323;
   color: white;
@@ -28,6 +35,36 @@
         font-size: 16px;
         margin-bottom: 5px;
       }
+
+      button {
+        background-color: #ff9900;
+        color: white;
+        margin-left: 10px;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        &:hover {
+          background-color: #e68a00;
+        }
+      }
     }
+  }
+}
+
+.create-button {
+  background-color: #ff9900;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.toplist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin-right: 10px;
   }
 }

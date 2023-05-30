@@ -1,11 +1,38 @@
-<div id="movie-cards" *ngFor="let toplist of topLists">
-    <h2>{{ toplist.name }}</h2>
-    <p>{{ toplist.description }}</p>
-    <div class="movie-row" *ngFor="let movie of toplist.movies" (click)="openDetails(movie)">
-        <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
-        <div class="descritpion">
-            <p class="title">{{movie.title}}</p>
-            {{movie.year}}
+<div id="create-toplist-container">
+    <button class="create-button" mat-raised-button (click)="showCreateForm = true">Create new Toplist</button>
+
+    <form *ngIf="showCreateForm" [formGroup]="createToplistForm" class="create-form" (ngSubmit)="createToplist()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Toplist name</mat-label>
+            <input matInput formControlName="name" placeholder="Toplist name" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" placeholder="Description" required>
+        </mat-form-field>
+        <button mat-button type="submit">Submit</button>
+        <button mat-button (click)="cancel()">Cancel</button>
+    </form>
+</div>
+
+<div id="movie-cards">
+    <div *ngFor="let toplist of topLists">
+        <div class="toplist-header">
+            <h2>{{ toplist.name }}</h2>
+            <button mat-icon-button class="small-delete-button" (click)="deleteToplist(toplist.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <p>{{ toplist.description }}</p>
+        <div class="movie-row" *ngFor="let movie of toplist.movies" (click)="openDetails(movie)">
+            <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+            <div class="descritpion">
+                <p class="title">{{movie.title}}</p>
+                {{movie.year}}
+                <button mat-icon-button class="small-delete-button" (click)="deleteMovie(movie.id, toplist.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </div>
     </div>
 </div>

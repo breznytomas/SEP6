@@ -12,6 +12,7 @@ export class LogonComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   private _unsubscribe$ = new Subject();
   public isLoading = false;
+  public error = '';
 
   public constructor(
     private fb: FormBuilder,
@@ -30,9 +31,18 @@ export class LogonComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-      this.authService.login(email, password);
+      this.authService.login(email, password).subscribe(
+        () => {
+          this.isLoading = false;
+        },
+        (error) => {
+          this.error = 'Invalid username or password. Please try again.';
+          this.isLoading = false;
+        }
+      );
     } else {
-      console.log('Form is not valid');
+      this.error = 'form is invalid';
+      this.isLoading = false;
     }
   }
 

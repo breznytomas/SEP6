@@ -15,5 +15,14 @@
             <li *ngFor="let star of stars"><a [routerLink]="['/person', star.id]">{{ star.name}}</a></li>
         </ul>
         <p><strong>Rating:</strong> {{ movie.rating.rating }} ({{ movie.rating.votes }} votes)</p>
+        <div id="add-toplist" *ngIf="isUser && toplists?.length > 0">
+            <button mat-raised-button (click)="showToplistSelect = !showToplistSelect">Add to Toplist</button>
+            <mat-form-field *ngIf="showToplistSelect && toplists">
+                <mat-select placeholder="Select a toplist" [(value)]="selectedToplist">
+                    <mat-option *ngFor="let toplist of toplists" [value]="toplist.id">{{toplist.name}}</mat-option>
+                </mat-select>
+                <button mat-button (click)="addMovieToToplist()">Add</button>
+            </mat-form-field>
+        </div>
     </div>
 </div>

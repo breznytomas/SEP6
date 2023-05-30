@@ -1,6 +1,7 @@
-body {
+#body {
   padding: 40px 20px 40px 20px;
   background-color: #232323;
+  flex-grow: 1;
 }
 
 #toolbar {
@@ -8,6 +9,7 @@ body {
   color: #ff9900;
   border-bottom: 2px solid #ff9900;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
 
   #left-items {
     flex: 1;
@@ -32,7 +34,7 @@ body {
       color: #ff9900;
       border: none;
       background-color: transparent;
-
+      margin-right: 20px;
       &:hover {
         background-color: rgba(255, 153, 0, 0.1);
       }
@@ -71,4 +73,9 @@ body {
       }
     }
   }
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

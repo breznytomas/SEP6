@@ -16,7 +16,7 @@ export class PersonService {
     return this.httpClient.get(this.urlUtil.baseUrl + '/people/' + id).pipe(
       map((response: any): Person => {
         let directedMovies: Movie[] =
-          response.directors?.map((director: any) => {
+          response.personWithDetails.directors?.map((director: any) => {
             return {
               id: director.movies.id,
               title: director.movies.title,
@@ -25,7 +25,7 @@ export class PersonService {
           }) || [];
 
         let starredMovies: Movie[] =
-          response.stars?.map((star: any) => {
+          response.personWithDetails.stars?.map((star: any) => {
             return {
               id: star.movies.id,
               title: star.movies.title,
@@ -33,10 +33,19 @@ export class PersonService {
             } as Movie;
           }) || [];
 
+        let directorAvgRating = response.directorAvgRating
+          ? Math.round(response.directorAvgRating * 100) / 100
+          : null;
+        let actorAvgRating = response.actorAvgRating
+          ? Math.round(response.actorAvgRating * 100) / 100
+          : null;
+
         return {
-          name: response.name,
+          name: response.personWithDetails.name,
           directed: directedMovies,
           starredIn: starredMovies,
+          directorAvgRating: directorAvgRating,
+          actorAvgRating: actorAvgRating,
         } as Person;
       })
     );

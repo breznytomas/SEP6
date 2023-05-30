@@ -7,9 +7,8 @@
     <!-- Display the movies -->
     <div class="movie-cards">
         <h1 class="header">Movies</h1>
-        <div *ngFor="let movie of searchResult.movies" (click)="openDetails(movie)" class="card">
+        <div *ngFor="let movie of searchResult.movies" (click)="openDetails(movie)" class="movie-row">
             <h2 class="movie-title">{{ movie.title }}</h2>
-            <hr class="divider">
             <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
         </div>
     </div>

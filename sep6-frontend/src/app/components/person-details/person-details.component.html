@@ -3,19 +3,26 @@
 </div>
 <div class="person-details" *ngIf="person">
     <div class="info">
-        <h2>{{ person.name }}</h2>
-        <p><strong>Starred in:</strong></p>
-        <div class="movie-cards">
-            <div *ngFor="let movie of person.starredIn" (click)="openDetails(movie)">
-                <h3>{{movie.title}}</h3>
-                <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+        <h3 *ngIf="person.actorAvgRating">Average rating of movies played in by this actor {{person.actorAvgRating}}
+        </h3>
+        <div id="starred-in" *ngIf="person.starredIn.length > 0">
+            <h2>{{ person.name }}</h2>
+            <p><strong>Starred in:</strong></p>
+            <div class="movie-cards">
+                <div class="movie-row" *ngFor="let movie of person.starredIn" (click)="openDetails(movie)">
+                    <h3>{{movie.title}}</h3>
+                    <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+                </div>
             </div>
         </div>
-        <p><strong>Directed:</strong></p>
-        <div class="movie-cards">
-            <div *ngFor="let movie of person.directed" (click)="openDetails(movie)">
-                <h3>{{movie.title}}</h3>
-                <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+        <div id="directed" *ngIf="person.directed.length > 0">
+            <h3 *ngIf="person.directorAvgRating">Average rating of directed movies: {{person.directorAvgRating}}</h3>
+            <p><strong>Directed:</strong></p>
+            <div class="movie-cards">
+                <div class="movie-row" *ngFor="let movie of person.directed" (click)="openDetails(movie)">
+                    <app-movie-card [movie]="movie" class="movie-card"></app-movie-card>
+                    <h3>{{movie.title}}</h3>
+                </div>
             </div>
         </div>
     </div>

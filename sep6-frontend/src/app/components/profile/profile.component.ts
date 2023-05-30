@@ -29,6 +29,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
   }
 
+  public logout(): void {
+    this.authService.logout();
+  }
+
   public ngOnDestroy(): void {
     this._unsubscribe$.next(true);
     this._unsubscribe$.complete();
