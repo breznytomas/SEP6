@@ -15,7 +15,7 @@ const createLoginRouter = (): express.Router => {
     router.post('/signup', handleErrorAsync(createAccount) )
     router.delete('/', ensureAuthenticated, handleErrorAsync(deleteAccount))
     router.post('/login',handleErrorAsync(login))
-    router.get('/logout',handleErrorAsync(logout))
+    router.get('/logout',logout)
     router.get('/checkAuth',handleErrorAsync(checkAuth))
     return router
 }
