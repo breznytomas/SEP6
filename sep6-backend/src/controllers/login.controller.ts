@@ -70,6 +70,22 @@ export function ensureAuthenticated(req, res, next) {
     }
 }
 
+export function checkAuth(req, res, next) {
+    if (req.isAuthenticated()) {
+        const user = req.user
+        delete user.password
+        res.status(200).json(user)
+    } else {
+        res.status(401).json({ message: 'You need to login first' });
+    }
+}
+
+
+
+
+
+
+
 
 
 

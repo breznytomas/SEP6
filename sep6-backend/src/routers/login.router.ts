@@ -1,5 +1,12 @@
 import express from "express";
-import {createAccount, deleteAccount, ensureAuthenticated, login, logout} from "../controllers/login.controller";
+import {
+    checkAuth,
+    createAccount,
+    deleteAccount,
+    ensureAuthenticated,
+    login,
+    logout
+} from "../controllers/login.controller";
 import {handleErrorAsync} from "../middleware/errorHandling"
 
 const createLoginRouter = (): express.Router => {
@@ -9,6 +16,7 @@ const createLoginRouter = (): express.Router => {
     router.delete('/', ensureAuthenticated, handleErrorAsync(deleteAccount))
     router.post('/login',handleErrorAsync(login))
     router.get('/logout',handleErrorAsync(logout))
+    router.get('/checkAuth',handleErrorAsync(checkAuth))
     return router
 }
 export default createLoginRouter()
